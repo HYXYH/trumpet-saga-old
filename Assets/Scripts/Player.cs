@@ -58,8 +58,6 @@ public class Player : MonoBehaviour {
 		spr = this.GetComponent<SpriteRenderer>();
 
 		incorrectParent = false;
-
-//		score = 0;
 	}
 
 	public void Awake(){

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Menu : MonoBehaviour {
 
+	public GameObject firstPipelinePrefab;
 	public GameObject firstPipeline;
 	public GameObject allMenu;
 	public GameObject replayMenu;
@@ -18,7 +19,12 @@ public class Menu : MonoBehaviour {
 
 	public GameObject level;
 
-//	bool starting = false;
+
+	bool isPlaying = false;
+
+	PipeLineGenerator pipeGenerator;
+	float timeToMaxSpeed;
+	float currentSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -27,21 +33,32 @@ public class Menu : MonoBehaviour {
 
 		cLast.text = lastScore.ToString();
 		cBest.text = maxScore.ToString();
+		cCurrent.enabled = false;
 	
+		pipeGenerator = this.GetComponent<PipeLineGenerator>();
+		timeToMaxSpeed = pipeGenerator.timeToMaxSpeed;
+		currentSpeed = pipeGenerator.currentSpeed;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		lastScore = player.GetComponent<Player>().score;
 
-		cCurrent.text = lastScore.ToString();
-		cLast.text = cCurrent.text;
-		PlayerPrefs.SetInt("Last Score", lastScore);
-		if(lastScore > maxScore){
-			maxScore = lastScore;
-			cBest.text = cCurrent.text;
-			PlayerPrefs.SetInt("Max Score", maxScore);
+		if(isPlaying) {
+			lastScore = player.GetComponent<Player>().score;
+
+			cCurrent.text = lastScore.ToString();
+			cLast.text = cCurrent.text;
+			PlayerPrefs.SetInt("Last Score", lastScore);
+			if(lastScore > maxScore){
+				maxScore = lastScore;
+				cBest.text = cCurrent.text;
+				PlayerPrefs.SetInt("Max Score", maxScore);
+			}
+		}
+		else{
+			lastScore = PlayerPrefs.GetInt("Last Score");
+			maxScore = PlayerPrefs.GetInt("Max Score");
 		}
 	
 	}
@@ -50,21 +67,35 @@ public class Menu : MonoBehaviour {
 		Debug.Log("Play!");
 		level.GetComponent<Animation>().Play("startGameDown");
 		firstPipeline.GetComponent<PipeLine>().enabled = true;
-		this.GetComponent<PipeLineGenerator>().enabled = true;
+		firstPipeline = null;
+		pipeGenerator.enabled = true;
 
 	}
 
 	public void buttonPlayPressed() {
+		isPlaying = true;
 		level.GetComponent<Animation>().Play("startGame");
 		allMenu.SetActive(false);
 		player.GetComponent<Player>().enabled = true;
+		player.GetComponent<Player>().score = 0;
+		cCurrent.enabled = true;
 	}
 
 	public void killedRestart() {
+		isPlaying = false;
 		Debug.Log("Restart");
 		allMenu.SetActive(true);
 		replayMenu.SetActive(true);
 		shareMenu.SetActive(false);
+		cCurrent.enabled = false;
+		this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+		if(firstPipeline == null) {
+			firstPipeline = (GameObject)GameObject.Instantiate(firstPipelinePrefab, new Vector3(0, 3.25f, 0), Quaternion.identity);
+			firstPipeline.GetComponent<Animation>().Play("FirstPipeOut");
+		}
+		pipeGenerator.lastPipeLine = firstPipeline;
+		pipeGenerator.timeToMaxSpeed = timeToMaxSpeed;
+		pipeGenerator.currentSpeed = currentSpeed;
 	}
 
 
@@ -86,7 +117,7 @@ public class Menu : MonoBehaviour {
 			if(other.transform.position.y > this.transform.position.y)
 			{
 				play();
-				GameObject.Destroy(this.gameObject.GetComponent<BoxCollider2D>());
+				this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			}
 		}
 	}

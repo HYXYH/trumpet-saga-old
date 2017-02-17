@@ -25,6 +25,9 @@ public class PipeLine : MonoBehaviour {
 	public bool isDying = false;
 
 
+	private float deleteHeight = 0;
+
+
 	// Use this for initialization
 	void Start () {
 		isDying = false;
@@ -38,7 +41,7 @@ public class PipeLine : MonoBehaviour {
 		if(!isDying)
 		{
 			this.transform.Translate(0, -speed * Time.deltaTime, 0);
-			if(this.transform.position.y < -8){
+			if(this.transform.position.y < deleteHeight){
 				GameObject.Destroy(this.gameObject);
 			}
 		}
@@ -58,6 +61,7 @@ public class PipeLine : MonoBehaviour {
 			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[0].initPipes(holeCoord, holeWidth);
+			deleteHeight = -5;
 
 			break;
 
@@ -67,6 +71,7 @@ public class PipeLine : MonoBehaviour {
 			pipes[0].initPipes(holeCoord, holeWidth);
 			pipes[0].enableMoving(0.5f);
 
+			deleteHeight = -5;
 			break;
 
 		case PipeLineType.moving2:
@@ -79,6 +84,7 @@ public class PipeLine : MonoBehaviour {
 			pipes[1].initPipes(holeCoord, holeWidth);
 			pipes[1].enableMoving(0.5f);
 
+			deleteHeight = -6;
 			break;
 
 		case PipeLineType.stair2:
@@ -89,6 +95,7 @@ public class PipeLine : MonoBehaviour {
 			holeCoord += 0.08f;
 			pipes[1].initPipes(holeCoord, holeWidth);
 
+			deleteHeight = -6;
 			break;
 
 		case PipeLineType.stair3:
@@ -102,6 +109,7 @@ public class PipeLine : MonoBehaviour {
 			holeCoord += 0.08f;
 			pipes[2].initPipes(holeCoord, holeWidth);
 
+			deleteHeight = -7;
 			break;
 
 		case PipeLineType.stair4:
@@ -118,6 +126,7 @@ public class PipeLine : MonoBehaviour {
 			holeCoord += 0.08f;
 			pipes[3].initPipes(holeCoord, holeWidth);
 
+			deleteHeight = -8;
 			break;
 		}
 	}

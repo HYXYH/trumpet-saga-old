@@ -4,9 +4,9 @@ using System.Collections;
 
 public class PlayerKiller : MonoBehaviour {
 
-	public float killTime = 2f;
-	public float fullKillTime;
-	public float flyTime = 2f;
+	private float killTime = 1f;
+	private float fullKillTime;
+	private float flyTime = 1f;
 	private float fullFlyTime;
 	private bool isDying = false;
 	public GameObject[] pls;
