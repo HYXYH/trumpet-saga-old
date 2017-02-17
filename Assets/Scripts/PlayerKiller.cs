@@ -41,6 +41,7 @@ public class PlayerKiller : MonoBehaviour {
 					}
 					foreach(GameObject pl in pls)
 					{
+						GameObject.FindGameObjectWithTag("Clouds").GetComponent<CloudMover>().reset();
 						if(!pl.GetComponent<PipeLine>().pipes[0].firstPipeInGame)
 							Destroy(pl.gameObject);
 					}
@@ -65,6 +66,17 @@ public class PlayerKiller : MonoBehaviour {
 							}
 						}
 					}
+					CloudMover cmover = GameObject.FindGameObjectWithTag("Clouds").GetComponent<CloudMover>();
+					foreach(SpriteRenderer sr in cmover.bigClouds) {
+						Color c = sr.color;
+						c.a = alpha;
+						sr.color = c;
+					}
+					foreach(SpriteRenderer sr in cmover.smallClouds) {
+						Color c = sr.color;
+						c.a = alpha;
+						sr.color = c;
+					}
 				}
 			}
 			else
@@ -87,11 +99,14 @@ public class PlayerKiller : MonoBehaviour {
 	}
 
 
-	void OnTriggerEnter2D(Collider2D other) {
+	public void OnTriggerEnter2D(Collider2D other) {
 		if(other.gameObject.tag == "Player")
 		{
 			Debug.Log("watch your head!");
 			player = other.gameObject.GetComponent<Player>();
+			if(player.isCheating)
+				return;
+
 			player.die();
 
 			PipeLineGenerator pgn = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>();
@@ -100,6 +115,8 @@ public class PlayerKiller : MonoBehaviour {
 			pgn.enabled = false;
 			AirLevel = pgn.AirLevel;
 			levelPos = pgn.AirLevel.transform.position.y;
+
+			GameObject.FindGameObjectWithTag("Clouds").transform.parent = AirLevel.transform;
 
 			if(AirLevel.GetComponent<Animation>().isPlaying)
 				AirLevel.GetComponent<Animation>().Stop();	

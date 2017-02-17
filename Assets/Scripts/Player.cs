@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
+	public bool isCheating = false;
+
 	public float maxSpeed = 5;
 	public float speed = -50f;
 
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 		if(isFalling){
 			fallTime -= Time.deltaTime;
 			if(fallTime < 0)
@@ -91,6 +93,8 @@ public class Player : MonoBehaviour {
 		}
 		else
 		{
+			checkIfFailed();
+
 			if (!inAir && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !incorrectParent)
 			{
 				rbody.velocity = new Vector2(0, rbody.velocity.y);
@@ -128,6 +132,30 @@ public class Player : MonoBehaviour {
 			processJumping();
 		}
 	}
+
+
+	void checkIfFailed() {
+		if(this.transform.localPosition.y < -3 && transform.parent.GetComponent<PipeLine>() != null)
+		{
+			if(isCheating)
+			{
+				transform.position = Vector3.zero;
+				rbody.velocity = Vector2.zero;
+
+				rbody.velocity = new Vector2(0, rbody.velocity.y);
+				rbody.gravityScale = 0;
+				audioJump.Play();
+				inAir = true;
+				isJumping = true;
+
+				return;
+			}
+			inAir = true;
+			rbody.velocity = Vector2.zero;
+			transform.parent.GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(GetComponent<BoxCollider2D>());
+		}
+	}
+
 
 	void setNewParent(){
 		GameObject parent = this.transform.parent.gameObject.GetComponent<PipeLine>().nextPipeLine;
