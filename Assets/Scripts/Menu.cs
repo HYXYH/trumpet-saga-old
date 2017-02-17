@@ -58,6 +58,10 @@ public class Menu : MonoBehaviour {
 		}
 		else{
 			lastScore = PlayerPrefs.GetInt("Last Score");
+			if(lastScore == -777)
+				cLast.text = "GOD MODE";
+			else
+				cLast.text = lastScore.ToString();
 			maxScore = PlayerPrefs.GetInt("Max Score");
 		}
 	

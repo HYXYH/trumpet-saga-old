@@ -4,9 +4,12 @@ using System.Collections;
 public class CloudMover : MonoBehaviour {
 
 
-	public PipeLineGenerator pipeineGenerator;
+	public PipeLineGenerator pipelineGenerator;
 	public SpriteRenderer[] bigClouds;
 	public SpriteRenderer[] smallClouds;
+
+	public float bigCloudsSpeedScale = 0.5f;
+	public float smallCloudsSpeedScale = 0.25f;
 
 	int currBig = 0;
 	int currSmall = 0;
@@ -15,22 +18,22 @@ public class CloudMover : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(pipeineGenerator == null)
+		if(pipelineGenerator == null)
 		{
-			pipeineGenerator = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>();
+			pipelineGenerator = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>();
 		}
 
-		speed = pipeineGenerator.currentSpeed;
+		speed = pipelineGenerator.currentSpeed;
 	
 		reset();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		speed = pipeineGenerator.currentSpeed;
-		float bigSpeed = speed/2;
-		float smallSpeed = speed/4;
-		if(pipeineGenerator.enabled) {
+		speed = pipelineGenerator.currentSpeed;
+		float bigSpeed = speed * bigCloudsSpeedScale;
+		float smallSpeed = speed * smallCloudsSpeedScale;
+		if(pipelineGenerator.enabled) {
 			
 //			this.transform.Translate(0, -bigSpeed * Time.deltaTime, 0);
 
@@ -58,7 +61,7 @@ public class CloudMover : MonoBehaviour {
 	}
 
 	public void reset() {
-		this.transform.parent = pipeineGenerator.AirLevel.transform;
+		this.transform.parent = pipelineGenerator.AirLevel.transform;
 		currBig = 0;
 		currSmall = 0;
 		for(int i = 0; i < bigClouds.Length; i++)

@@ -274,4 +274,18 @@ public class Player : MonoBehaviour {
 		newAudio.volume = vol; 
 		return newAudio; 
 	}
+
+
+	public void changeCheatMode() {
+		if(isCheating)
+		{
+			PlayerPrefs.SetInt("Last Score", 0);
+			isCheating = false;
+		}
+		else {
+			PlayerPrefs.SetInt("Last Score", -777);
+			isCheating = true;
+		}
+
+	}
 }
