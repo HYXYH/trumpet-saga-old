@@ -49,6 +49,22 @@ public class PlayerKiller : MonoBehaviour {
 				{
 					flyTime -= Time.deltaTime;
 					moveLevel();
+
+					float alpha = (flyTime / fullFlyTime);
+					foreach(GameObject pl in pls)
+					{
+						PipeLine p = pl.GetComponent<PipeLine>();
+
+						if(!p.pipes[0].firstPipeInGame){
+							foreach(PipePair pair in p.pipes){
+								Color c = pair.LeftPipe.GetComponent<SpriteRenderer>().color;
+								c.a = alpha;
+								pair.LeftPipe.GetComponent<SpriteRenderer>().color = c;
+								pair.RightPipe.GetComponent<SpriteRenderer>().color = c;
+
+							}
+						}
+					}
 				}
 			}
 			else
@@ -84,6 +100,9 @@ public class PlayerKiller : MonoBehaviour {
 			pgn.enabled = false;
 			AirLevel = pgn.AirLevel;
 			levelPos = pgn.AirLevel.transform.position.y;
+
+			if(AirLevel.GetComponent<Animation>().isPlaying)
+				AirLevel.GetComponent<Animation>().Stop();	
 
 
 			foreach(GameObject pl in pls)
