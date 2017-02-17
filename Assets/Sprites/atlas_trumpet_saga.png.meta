@@ -1,0 +1,729 @@
+fileFormatVersion: 2
+guid: 0b6e012e4d96c4a89b1491c1c608bcd8
+timeCreated: 1486835273
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sp_background
+    21300002: sp_pipe
+    21300004: sp_pause
+    21300006: sp_start
+    21300008: sp_title
+    21300010: sp_over
+    21300012: sp_score
+    21300014: sp_best
+    21300016: sp_share
+    21300018: sp_menu_bg
+    21300020: sp_vk
+    21300022: sp_twitter
+    21300024: sp_fb
+    21300026: sp_no_ads
+    21300028: sp_rank
+    21300030: sp_volume
+    21300032: sp_background
+    21300034: sp_replay
+    21300036: atlas_trumpet_saga_1
+    21300038: atlas_trumpet_saga_2
+    21300040: atlas_trumpet_saga_3
+    21300042: atlas_trumpet_saga_4
+    21300044: atlas_trumpet_saga_5
+    21300046: atlas_trumpet_saga_6
+    21300048: atlas_trumpet_saga_7
+    21300050: atlas_trumpet_saga_8
+    21300052: atlas_trumpet_saga_9
+    21300054: atlas_trumpet_saga_10
+    21300056: atlas_trumpet_saga_11
+    21300058: atlas_trumpet_saga_12
+    21300060: atlas_trumpet_saga_13
+    21300062: atlas_trumpet_saga_14
+    21300064: atlas_trumpet_saga_15
+    21300066: atlas_trumpet_saga_16
+    21300068: atlas_trumpet_saga_17
+    21300070: atlas_trumpet_saga_18
+    21300072: atlas_trumpet_saga_19
+    21300074: atlas_trumpet_saga_20
+    21300076: atlas_trumpet_saga_21
+    21300078: atlas_trumpet_saga_22
+    21300080: atlas_trumpet_saga_23
+    21300082: sp_pause
+    21300084: atlas_trumpet_saga_25
+    21300086: atlas_trumpet_saga_26
+    21300088: atlas_trumpet_saga_27
+    21300090: sp_pipe
+    21300092: atlas_trumpet_saga_29
+    21300094: sp_start
+    21300096: atlas_trumpet_saga_31
+    21300098: atlas_trumpet_saga_32
+    21300100: atlas_trumpet_saga_33
+    21300102: atlas_trumpet_saga_34
+    21300104: atlas_trumpet_saga_35
+    21300106: atlas_trumpet_saga_36
+    21300108: atlas_trumpet_saga_37
+    21300110: sp_title
+    21300112: atlas_trumpet_saga_39
+    21300114: atlas_trumpet_saga_40
+    21300116: atlas_trumpet_saga_41
+    21300118: atlas_trumpet_saga_42
+    21300120: atlas_trumpet_saga_43
+    21300122: atlas_trumpet_saga_44
+    21300124: sp_over
+    21300126: atlas_trumpet_saga_46
+    21300128: atlas_trumpet_saga_47
+    21300130: atlas_trumpet_saga_48
+    21300132: sp_score
+    21300134: sp_score
+    21300136: atlas_trumpet_saga_51
+    21300138: atlas_trumpet_saga_52
+    21300140: atlas_trumpet_saga_53
+    21300142: atlas_trumpet_saga_54
+    21300144: atlas_trumpet_saga_55
+    21300146: atlas_trumpet_saga_56
+    21300148: atlas_trumpet_saga_57
+    21300150: atlas_trumpet_saga_58
+    21300152: atlas_trumpet_saga_59
+    21300154: sp_best
+    21300156: atlas_trumpet_saga_61
+    21300158: atlas_trumpet_saga_62
+    21300160: atlas_trumpet_saga_63
+    21300162: atlas_trumpet_saga_64
+    21300164: atlas_trumpet_saga_65
+    21300166: sp_share_results
+    21300168: atlas_trumpet_saga_67
+    21300170: atlas_trumpet_saga_68
+    21300172: atlas_trumpet_saga_69
+    21300174: atlas_trumpet_saga_70
+    21300176: atlas_trumpet_saga_71
+    21300178: atlas_trumpet_saga_72
+    21300180: atlas_trumpet_saga_73
+    21300182: atlas_trumpet_saga_74
+    21300184: atlas_trumpet_saga_75
+    21300186: atlas_trumpet_saga_76
+    21300188: atlas_trumpet_saga_77
+    21300190: sp_no_ads
+    21300192: sp_replay
+    21300194: sp_volume
+    21300196: sp_menu
+    21300198: sp_vk
+    21300200: sp_twitter
+    21300202: sp_fb
+    21300204: sp_rank
+    21300206: sp_share
+    21300208: sp_back
+    21300210: sp_ground
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sp_background
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 989
+        width: 454
+        height: 811
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_1
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 1573
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_2
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 1573
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_3
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1573
+        width: 50
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_4
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 1493
+        width: 65
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_5
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 1493
+        width: 65
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_6
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 1493
+        width: 70
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_7
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 1413
+        width: 55
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_8
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 1413
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_9
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 1413
+        width: 50
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_10
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 1413
+        width: 50
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_11
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 1248
+        width: 70
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_12
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 1248
+        width: 70
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_13
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1248
+        width: 75
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_14
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 1328
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_15
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 1253
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_16
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 1188
+        width: 30
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_17
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 1193
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_18
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1193
+        width: 45
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_19
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 1183
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_20
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 1183
+        width: 30
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_21
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 1188
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_22
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 1193
+        width: 45
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: atlas_trumpet_saga_23
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1193
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_pause
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 838
+        width: 54
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_pipe
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 839
+        width: 456
+        height: 44
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_start
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 788
+        width: 139
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_title
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 529
+        width: 257
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_over
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 539
+        width: 152
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_score
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 656
+        width: 58
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_best
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 574
+        width: 116
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_share_results
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 480
+        width: 224
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_no_ads
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 284
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_replay
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 213
+        width: 97
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_volume
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 285
+        width: 65
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_menu
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 110
+        width: 345
+        height: 325
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_vk
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 214
+        width: 84
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_twitter
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 213
+        width: 84
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_fb
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 214
+        width: 84
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_rank
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 156
+        width: 65
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_share
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 163
+        width: 65
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_back
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 0
+        width: 56
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: sp_ground
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 989
+        width: 454
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
