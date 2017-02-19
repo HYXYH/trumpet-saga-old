@@ -8,6 +8,10 @@ public class Menu : MonoBehaviour {
 	public GameObject allMenu;
 	public GameObject replayMenu;
 	public GameObject shareMenu;
+	public GameObject startMenu;
+	public GameObject volOn;
+	public GameObject volOff;
+
 	public GameObject player;
 
 	public UnityEngine.UI.Text cLast;
@@ -112,6 +116,20 @@ public class Menu : MonoBehaviour {
 		replayMenu.SetActive(true);
 		shareMenu.SetActive(false);
 	}
+
+
+	public void switchVolumeToOn() {
+		volOff.SetActive(false);
+		volOn.SetActive(true);
+		AudioListener.volume = 1f;
+	}
+
+	public void switchVolumeToOff() {
+		volOn.SetActive(false);
+		volOff.SetActive(true);
+		AudioListener.volume = 0f;
+	}
+
 
 
 

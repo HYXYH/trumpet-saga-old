@@ -8,6 +8,10 @@ public class spResize : MonoBehaviour {
 	// Use this for initialization
 	public bool debugBg = false;
 
+	void start() {
+		Resize();
+	}
+
 	#region METHODS
 	private void Awake()
 	{
