@@ -40,7 +40,7 @@ public class Sharing : MonoBehaviour {
 		switch (result) {
 		case "NotInstall":
 			// приложение не установлено
-			Debug.Log ("приложение не установлено");
+			Debug.Log ("приложение " + socialType + " не установлено");
 			switch(socialType) {
 			case "vk":
 				Application.OpenURL(string.Format("http://vk.com/share.php?description={0}&url={1}", msg, gameLink));
