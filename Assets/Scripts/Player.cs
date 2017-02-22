@@ -59,6 +59,8 @@ public class Player : MonoBehaviour {
 	public void Awake(){
 		// add the necessary AudioSources:
 		audioStep = AddAudio(clipStep, false, false, 0.8f);
+		audioStep.pitch = 1.8f;
+
 		audioJump = AddAudio(clipJump, false, false, 0.8f);
 		audioCollide = AddAudio(clipCollide, false, false, 1);
 		//audioFire = AddAudio(audioFire, false, false, 0.8); 
@@ -98,6 +100,7 @@ public class Player : MonoBehaviour {
 			{
 				rbody.velocity = new Vector2(0, rbody.velocity.y);
 				rbody.gravityScale = 0;
+				audioStep.Stop();
 				audioJump.Play();
 				inAir = true;
 				isJumping = true;
@@ -110,6 +113,11 @@ public class Player : MonoBehaviour {
 			if(incorrectParent)
 			{
 				setNewParent();
+			}
+
+			if (!inAir && !audioStep.isPlaying)
+			{
+				audioStep.Play();
 			}
 		}
 	}
@@ -195,7 +203,7 @@ public class Player : MonoBehaviour {
 		speed *= rel;
 		maxSpeed *= rel;
 		lastPipeSpeed = pipeSpeed;
-
+		audioStep.pitch *= rel;
 
 	}
 
@@ -208,6 +216,7 @@ public class Player : MonoBehaviour {
 
 	public void die() {
 		isJumping = false;
+		audioStep.pitch = 1.8f;
 		rbody.gravityScale = 0;
 		rbody.velocity = new Vector3(0,0,0);
 		this.GetComponent<BoxCollider2D>().enabled = false;
