@@ -152,6 +152,7 @@ public class Player : MonoBehaviour {
 			}
 			inAir = true;
 			rbody.velocity = Vector2.zero;
+			GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>().killedBy = "FellDown";
 			transform.parent.GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(GetComponent<BoxCollider2D>());
 		}
 	}
@@ -211,7 +212,6 @@ public class Player : MonoBehaviour {
 		this.GetComponent<BoxCollider2D>().enabled = false;
 		this.transform.parent = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>().AirLevel.transform;
 		audioCollide.Play();
-		// play falling animation
 	}
 
 	public void fallDownToStart(float fTime)
@@ -288,4 +288,5 @@ public class Player : MonoBehaviour {
 		}
 
 	}
+
 }

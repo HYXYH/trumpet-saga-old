@@ -32,7 +32,10 @@ public class PlayerKiller : MonoBehaviour {
 				player.fallDownToStart(flyTime + 0.1f);
 				if(flyTime < 0)
 				{
-					GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>().killedRestart();
+					Menu menu =  GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>();
+					if(menu.killedBy == "")
+						menu.killedBy = this.gameObject.transform.parent.parent.GetComponent<PipeLine>().type.ToString();
+					menu.killedRestart();
 					if(this.gameObject.transform.parent.GetComponent<PipePair>().firstPipeInGame)
 					{
 						isDying = false;

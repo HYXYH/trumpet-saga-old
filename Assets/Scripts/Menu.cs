@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 using GoogleMobileAds.Api;
+using UnityEngine.Analytics;
 
 public class Menu : MonoBehaviour {
 
@@ -24,8 +26,15 @@ public class Menu : MonoBehaviour {
 	public int maxScore = 0;
 
 	public GameObject level;
+	public string killedBy = "";
+	float startPlayTime = 0;
+	int gamesPlayed = 0;
 
 	string screenshot_path;
+
+	bool adsDisabled = false;
+	bool adLeavingApplication = false;
+
 
 
 	bool isPlaying = false;
@@ -38,6 +47,7 @@ public class Menu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		adsDisabled = PlayerPrefs.HasKey("NoAds");
 		lastScore = PlayerPrefs.GetInt("Last Score");
 		maxScore = PlayerPrefs.GetInt("Max Score");
 
@@ -87,6 +97,9 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void buttonPlayPressed() {
+		gamesPlayed++;
+		startPlayTime = Time.time;
+		killedBy = "";
 		isPlaying = true;
 		level.GetComponent<Animation>().Play("startGame");
 		allMenu.SetActive(false);
@@ -94,15 +107,26 @@ public class Menu : MonoBehaviour {
 		player.GetComponent<Player>().score = 0;
 		cCurrent.enabled = true;
 
-		if(interstitial != null)
-			interstitial.Destroy();
-		RequestInterstitial();
+		if(!adsDisabled){
+			if(interstitial != null)
+				interstitial.Destroy();
+			RequestInterstitial();
+		}
 	}
 
 	public void killedRestart() {
-		if ((interstitial != null) && interstitial.IsLoaded()) {
-			interstitial.Show();
+		if(!adsDisabled){
+			if ((interstitial != null) && interstitial.IsLoaded()) {
+				interstitial.Show();
+			}
 		}
+
+		Analytics.CustomEvent("gameOver", new Dictionary<string, object>
+			{
+				{ "score", lastScore },
+				{ "killedBy", killedBy },
+				{ "PlayTime", Time.time - startPlayTime }
+			});
 
 
 		isPlaying = false;
@@ -142,7 +166,30 @@ public class Menu : MonoBehaviour {
 		Build();
 		// Load the interstitial with the request.
 		interstitial.LoadAd(request);
-		}
+
+
+		// Called when the user returned from the app after an ad click.
+		interstitial.OnAdClosed += HandleOnAdClosed;
+		// Called when the ad click caused the user to leave the application.
+		interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+
+	}
+	
+		public void HandleOnAdClosed(object sender, System.EventArgs ea)
+	{
+		print("OnAdClosed event received.");
+
+		Analytics.CustomEvent("AdClosed", new Dictionary<string, object>{
+		{"AdLeavedApplication", adLeavingApplication}
+		});
+		adLeavingApplication = false;
+	}
+
+		public void HandleOnAdLeavingApplication(object sender, System.EventArgs ea)
+	{
+		print("OnAdLeavingApplication event received.");
+		adLeavingApplication = true;
+	}
 
 
 
@@ -178,6 +225,9 @@ public class Menu : MonoBehaviour {
 		File.WriteAllBytes(destination, dataToSave);
 		if(!Application.isEditor)
 		{
+			Analytics.CustomEvent("Share", new Dictionary<string, object>{});
+
+
 			// block to open the file and share it ------------START
 			AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
 			AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
@@ -240,6 +290,16 @@ public class Menu : MonoBehaviour {
 				this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			}
 		}
+	}
+	
+
+
+	void OnApplicationQuit() {
+		Analytics.CustomEvent("QuitGame", new Dictionary<string, object>{
+		{"TotalPlayTime", Time.time},
+		{"GamesPlayed", gamesPlayed}
+		});
+		Debug.Log("Application ending after " + Time.time + " seconds");
 	}
 
 }
