@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections;
+using GoogleMobileAds.Api;
 
 public class Menu : MonoBehaviour {
 
@@ -32,6 +33,8 @@ public class Menu : MonoBehaviour {
 	PipeLineGenerator pipeGenerator;
 	float timeToMaxSpeed;
 	float currentSpeed;
+
+	InterstitialAd interstitial;
 
 	// Use this for initialization
 	void Start () {
@@ -90,9 +93,18 @@ public class Menu : MonoBehaviour {
 		player.GetComponent<Player>().enabled = true;
 		player.GetComponent<Player>().score = 0;
 		cCurrent.enabled = true;
+
+		if(interstitial != null)
+			interstitial.Destroy();
+		RequestInterstitial();
 	}
 
 	public void killedRestart() {
+		if ((interstitial != null) && interstitial.IsLoaded()) {
+			interstitial.Show();
+		}
+
+
 		isPlaying = false;
 		Debug.Log("Restart");
 		allMenu.SetActive(true);
@@ -108,6 +120,29 @@ public class Menu : MonoBehaviour {
 		pipeGenerator.timeToMaxSpeed = timeToMaxSpeed;
 		pipeGenerator.currentSpeed = currentSpeed;
 	}
+
+
+
+
+	private void RequestInterstitial()
+	{
+		#if UNITY_ANDROID
+		string adUnitId = "ca-app-pub-3940599218656149/5725830911";
+		#elif UNITY_IPHONE
+		string adUnitId = "INSERT_IOS_INTERSTITIAL_AD_UNIT_ID_HERE";
+		#else
+		string adUnitId = "unexpected_platform";
+		#endif
+
+		// Initialize an InterstitialAd.
+		interstitial = new InterstitialAd(adUnitId);
+		// Create an empty ad request.
+		AdRequest request = new AdRequest.Builder().
+		AddTestDevice("03007c0c307b75cc").
+		Build();
+		// Load the interstitial with the request.
+		interstitial.LoadAd(request);
+		}
 
 
 
@@ -165,40 +200,9 @@ public class Menu : MonoBehaviour {
 		}
 
 	}
-
-
-//	public IEnumerator make_score_screenshot() {
-//		// wait for graphics to render
-//		yield return new WaitForEndOfFrame();
-//		//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PHOTO
-//		// create the texture
-//		Texture2D screenTexture = new Texture2D(Screen.width, Screen.height,TextureFormat.RGB24,true);
-//		// put buffer into texture
-//		screenTexture.ReadPixels(new Rect(0f, 0f, Screen.width, Screen.height),0,0);
-//		// apply
-//		screenTexture.Apply();
-//		//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PHOTO
-//		byte[] dataToSave = screenTexture.EncodeToPNG();
-//		screenshot_path = Path.Combine(Application.persistentDataPath,System.DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + ".png");
-//		File.WriteAllBytes(screenshot_path, dataToSave);
-//	}
-//
-
-
-	public void ShareIt (string app) {
-		string message = "My score in Trupet Saga: " + cLast.text;
-
-
-		if (app != "ok")
-			Sharing.ShareVia (app, message);
-		else
-			Sharing.ShareVia (app, message, string.Format("{0};{1}", App.OdnoklassnikiAppId, App.OdnoklassnikiSecretId));
-	}
-
+		
 
 	public void openShareMenu() {
-//		StartCoroutine( make_score_screenshot() );
-
 //		replayMenu.SetActive(false);
 //		shareMenu.SetActive(true);
 
