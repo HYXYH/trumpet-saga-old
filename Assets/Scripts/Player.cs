@@ -136,7 +136,7 @@ public class Player : MonoBehaviour {
 
 
 	void checkIfFailed() {
-		if(this.transform.localPosition.y < -3 && transform.parent.GetComponent<PipeLine>() != null)
+		if(transform.parent == null || this.transform.localPosition.y < -3 && transform.parent.GetComponent<PipeLine>() != null)
 		{
 			if(isCheating)
 			{

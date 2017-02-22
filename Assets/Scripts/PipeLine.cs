@@ -41,7 +41,14 @@ public class PipeLine : MonoBehaviour {
 		if(!isDying)
 		{
 			this.transform.Translate(0, -speed * Time.deltaTime, 0);
+
 			if(this.transform.position.y < deleteHeight){
+				Player p = this.GetComponentInChildren<Player>();
+				if (p != null)
+				{
+					p.gameObject.transform.parent = null;
+					pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(p.gameObject.GetComponent<BoxCollider2D>());
+				}
 				GameObject.Destroy(this.gameObject);
 			}
 		}
