@@ -250,6 +250,12 @@ public class Menu : MonoBehaviour {
 		}
 
 	}
+
+
+	public void noAdsPurchased(){
+		PlayerPrefs.SetString("NoAds","Ads Disabled");
+		adsDisabled = true;
+	}
 		
 
 	public void openShareMenu() {

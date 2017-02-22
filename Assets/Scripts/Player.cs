@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rbody;
 
 
+	bool sameTouch = false;
 	private bool isFalling = false;
 	private float fallTime = 0;
 	private float fullFallTime = 0;
@@ -40,14 +41,7 @@ public class Player : MonoBehaviour {
 
 	//todo:
 	// звуки шагов
-	// спаунить первый пайп
-	// анимация кнопок
-	// облака
-	// vk
-	// tw
-	// fb
 	// google rank (рейтинг игроков)
-	// ads
 
 
 
@@ -95,14 +89,21 @@ public class Player : MonoBehaviour {
 		{
 			checkIfFailed();
 
-			if (!inAir && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !incorrectParent)
+			if(Input.touchCount == 0)
+			{
+				sameTouch = false;
+			}
+
+			if (!inAir && !sameTouch && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !incorrectParent)
 			{
 				rbody.velocity = new Vector2(0, rbody.velocity.y);
 				rbody.gravityScale = 0;
 				audioJump.Play();
 				inAir = true;
 				isJumping = true;
+				sameTouch = true;
 			}
+
 			anim.SetBool("inAir", inAir);
 			anim.SetFloat("speed", speed);
 				
