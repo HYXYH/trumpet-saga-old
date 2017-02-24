@@ -36,6 +36,7 @@ public class ArenaController : MonoBehaviour {
 			this.GetComponent<PipeLineGenerator>().lastPipeLine = BossPipeLine;
 			BossPipeLine.GetComponent<Animation>().Play("BossPipeOut");
 
+			GameObject.Find("Clouds").gameObject.GetComponentInChildren<CloudMover>().enabled = false;
 		}
 
 		if(isFighting && Boss == null)
@@ -66,7 +67,7 @@ public class ArenaController : MonoBehaviour {
 
 		arenaPipeLine.transform.parent = BossPipeLine.transform;
 		isFighting = false;
-		Boss.GetComponent<Boss>().enabled = false;
+		Boss.GetComponent<Boss>().canFire = false;
 		this.enabled = false;
 	}
 }

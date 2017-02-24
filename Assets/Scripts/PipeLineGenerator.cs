@@ -28,8 +28,11 @@ public class PipeLineGenerator : MonoBehaviour {
 
 	public int pipeCounter;
 
+	int bossCounter = 0;
+
 	// Use this for initialization
-	void Start () {
+	public void Start () {
+		bossCounter = 0;
 		pipeCounter = 1;
 		fullTimeToMax = timeToMaxSpeed;
 		startSpeed = currentSpeed;
@@ -63,7 +66,8 @@ public class PipeLineGenerator : MonoBehaviour {
 
 	void genTypeForNextPipeLine()
 	{
-		float pscore = player.score;
+//		float pscore = player.score;
+		float pscore = 15 + bossCounter * 10;
 		float ptype = 0;
 		if(pscore > 60)
 			ptype = 60 * Random.value;
@@ -95,10 +99,11 @@ public class PipeLineGenerator : MonoBehaviour {
 	public void genNewPipeLine() {
 		GameObject newPipeline;
 		pipeCounter++;
-		if(pipeCounter%5 == 0)
+		if(pipeCounter%20 == 0)
 		{
 			nextPLtypename = PipeLine.PipeLineType.simple;
 			pipeCounter = 0;
+			bossCounter++;
 		}
 
 		switch(nextPLtypename)

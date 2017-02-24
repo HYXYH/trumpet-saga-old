@@ -69,7 +69,7 @@ public class PlayerKiller : MonoBehaviour {
 							}
 						}
 					}
-					CloudMover cmover = GameObject.FindGameObjectWithTag("Clouds").GetComponent<CloudMover>();
+					CloudMover cmover = GameObject.Find("Clouds").GetComponent<CloudMover>();
 					foreach(SpriteRenderer sr in cmover.bigClouds) {
 						Color c = sr.color;
 						c.a = alpha;
@@ -118,12 +118,14 @@ public class PlayerKiller : MonoBehaviour {
 			ArenaController arena = GameObject.FindGameObjectWithTag("Generator").GetComponent<ArenaController>();
 			arena.enabled = false;
 
+
 			pgn.enabled = false;
-			pgn.pipeCounter = 1;
+			GameObject.Find("Clouds").GetComponent<CloudMover>().enabled = false;
+			pgn.Start();
 			AirLevel = pgn.AirLevel;
 			levelPos = pgn.AirLevel.transform.position.y;
 
-			GameObject.FindGameObjectWithTag("Clouds").transform.parent = AirLevel.transform;
+			GameObject.Find("Clouds").transform.parent = AirLevel.transform;
 
 			if(AirLevel.GetComponent<Animation>().isPlaying)
 				AirLevel.GetComponent<Animation>().Stop();	

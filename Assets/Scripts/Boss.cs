@@ -26,7 +26,7 @@ public class Boss : MonoBehaviour {
 	private AudioSource audioCollide;
 	private AudioSource audioFire;
 
-
+	public bool canFire = true;
 	public float timeToFire = 1;
 	private float timeToFireLeft = 0;
 	public float timeToFireDelta = 0.5f;
@@ -97,6 +97,8 @@ public class Boss : MonoBehaviour {
 
 	void fire()
 	{
+		if(!canFire)
+			return;
 		//fire Axe
 		Vector3 pos = transform.position;
 		pos.y-=0.5f;

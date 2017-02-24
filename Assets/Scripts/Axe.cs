@@ -26,7 +26,7 @@ public class Axe : MonoBehaviour {
 		transform.position = transform.position + new Vector3(0f,speed * Time.deltaTime,0f);
 	}
 
-	void OnTriggerEnter2D(Collider2D coll) {
+	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.tag == "Player") {
 
 			// stop boss
@@ -37,11 +37,12 @@ public class Axe : MonoBehaviour {
 			GameObject.Find("Player").GetComponent<Player>().inAir = true;
 			GameObject.Find("Player").GetComponent<Player>().isFighting = false;
 			GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>().killedBy = "Boss";
-			GameObject.FindGameObjectWithTag("PipeLine").GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(coll);
-//			GameObject.FindGameObjectWithTag("PipeLine").GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(coll.gameObject.GetComponent<BoxCollider2D>());
+//			GameObject.FindGameObjectWithTag("PipeLine").GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(coll);
+			GameObject.FindGameObjectWithTag("PipeLine").GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(coll.collider.gameObject.GetComponent<BoxCollider2D>());
 
 
 			Destroy(this.gameObject);
 		}
+		Debug.Log("Axe collidied!");
 	}
 }

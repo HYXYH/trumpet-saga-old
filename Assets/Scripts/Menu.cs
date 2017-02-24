@@ -40,6 +40,7 @@ public class Menu : MonoBehaviour {
 	bool isPlaying = false;
 
 	PipeLineGenerator pipeGenerator;
+	CloudMover cloudMover;
 	float timeToMaxSpeed;
 	float currentSpeed;
 
@@ -56,6 +57,7 @@ public class Menu : MonoBehaviour {
 		cCurrent.enabled = false;
 	
 		pipeGenerator = this.GetComponent<PipeLineGenerator>();
+		cloudMover = this.gameObject.GetComponentInChildren<CloudMover>();
 		timeToMaxSpeed = pipeGenerator.timeToMaxSpeed;
 		currentSpeed = pipeGenerator.currentSpeed;
 	}
@@ -93,7 +95,7 @@ public class Menu : MonoBehaviour {
 		firstPipeline.GetComponent<PipeLine>().enabled = true;
 		firstPipeline = null;
 		pipeGenerator.enabled = true;
-
+		cloudMover.enabled = true;
 	}
 
 	public void buttonPlayPressed() {
@@ -302,7 +304,7 @@ public class Menu : MonoBehaviour {
 					firstPipeline.GetComponent<PipeLine>().enabled = true;
 					firstPipeline = null;
 					pipeGenerator.enabled = true;
-
+					cloudMover.enabled = true;
 				}
 				this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			}

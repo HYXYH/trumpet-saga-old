@@ -26,14 +26,15 @@ public class Fireball : MonoBehaviour {
 		transform.Translate(new Vector3(0f,speed * Time.deltaTime,0f));
 	}
 
-	void OnTriggerEnter2D(Collider2D coll) {
-		if (coll.gameObject.tag == "Boss") {
-			coll.gameObject.SendMessage("shotDown");
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.collider.gameObject.tag == "Boss") {
+			coll.collider.gameObject.SendMessage("shotDown");
 			Destroy(this.gameObject);
 		}
+		Debug.Log("Fireball collidied!");
 
-		if (coll.gameObject.tag == "Axe") {
-			Destroy(coll.gameObject);
+		if (coll.collider.gameObject.tag == "Axe") {
+			Destroy(coll.collider.gameObject);
 			Destroy(this.gameObject);
 		}
 	}

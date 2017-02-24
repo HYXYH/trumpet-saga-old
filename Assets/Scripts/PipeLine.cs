@@ -76,7 +76,7 @@ public class PipeLine : MonoBehaviour {
 			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[0].initPipes(holeCoord, holeWidth);
-			pipes[0].enableMoving(0.5f);
+			pipes[0].enableMoving(0.4f);
 
 			deleteHeight = -5;
 			break;
@@ -85,11 +85,12 @@ public class PipeLine : MonoBehaviour {
 			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[0].initPipes(holeCoord, holeWidth);
-			pipes[0].enableMoving(0.5f);
+			pipes[0].enableMoving(0.4f);
 
-			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
+			holeCoord += holeWidth/2  * Random.value * Mathf.Pow(-1f, Random.Range(0,2));
+//			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[1].initPipes(holeCoord, holeWidth);
-			pipes[1].enableMoving(0.5f);
+			pipes[1].enableMoving(0.4f);
 
 			deleteHeight = -6;
 			break;

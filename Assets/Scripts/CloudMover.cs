@@ -33,7 +33,7 @@ public class CloudMover : MonoBehaviour {
 		speed = pipelineGenerator.currentSpeed;
 		float bigSpeed = speed * bigCloudsSpeedScale;
 		float smallSpeed = speed * smallCloudsSpeedScale;
-		if(pipelineGenerator.enabled) {
+//		if(pipelineGenerator.enabled) {
 			
 //			this.transform.Translate(0, -bigSpeed * Time.deltaTime, 0);
 
@@ -57,7 +57,7 @@ public class CloudMover : MonoBehaviour {
 				smallClouds[currSmall].transform.Translate(0,10 * smallClouds.Length - 1,0);
 				currSmall = (currSmall + 1) % smallClouds.Length;
 			}
-		}
+//		}
 	}
 
 	public void reset() {
