@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0b6e012e4d96c4a89b1491c1c608bcd8
-timeCreated: 1486835273
+timeCreated: 1487948454
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -32,11 +32,11 @@ TextureImporter:
     21300050: atlas_trumpet_saga_8
     21300052: atlas_trumpet_saga_9
     21300054: atlas_trumpet_saga_10
-    21300056: atlas_trumpet_saga_11
-    21300058: atlas_trumpet_saga_12
-    21300060: atlas_trumpet_saga_13
-    21300062: atlas_trumpet_saga_14
-    21300064: atlas_trumpet_saga_15
+    21300056: boss_step_1
+    21300058: boss_step_2
+    21300060: boss_step_3
+    21300062: boss_step_4
+    21300064: boss_fall
     21300066: atlas_trumpet_saga_16
     21300068: atlas_trumpet_saga_17
     21300070: atlas_trumpet_saga_18
@@ -307,46 +307,46 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_11
+      name: boss_step_1
       rect:
         serializedVersion: 2
         x: 698
-        y: 1248
+        y: 1328
         width: 70
-        height: 160
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_12
+      name: boss_step_2
       rect:
         serializedVersion: 2
         x: 778
-        y: 1248
+        y: 1328
         width: 70
-        height: 160
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_13
+      name: boss_step_3
       rect:
         serializedVersion: 2
         x: 853
-        y: 1248
+        y: 1328
         width: 75
-        height: 160
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_14
+      name: boss_step_4
       rect:
         serializedVersion: 2
         x: 938
@@ -359,7 +359,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_15
+      name: boss_fall
       rect:
         serializedVersion: 2
         x: 943

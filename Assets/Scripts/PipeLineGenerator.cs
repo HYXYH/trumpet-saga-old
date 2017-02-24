@@ -26,8 +26,11 @@ public class PipeLineGenerator : MonoBehaviour {
 	PipeLine.PipeLineType nextPLtypename;
 	public float distanceToNextPipe = 1;
 
+	public int pipeCounter;
+
 	// Use this for initialization
 	void Start () {
+		pipeCounter = 1;
 		fullTimeToMax = timeToMaxSpeed;
 		startSpeed = currentSpeed;
 
@@ -91,6 +94,12 @@ public class PipeLineGenerator : MonoBehaviour {
 
 	public void genNewPipeLine() {
 		GameObject newPipeline;
+		pipeCounter++;
+		if(pipeCounter%5 == 0)
+		{
+			nextPLtypename = PipeLine.PipeLineType.simple;
+			pipeCounter = 0;
+		}
 
 		switch(nextPLtypename)
 		{
@@ -140,5 +149,14 @@ public class PipeLineGenerator : MonoBehaviour {
 		npl.speed = currentSpeed;
 		npl.type = nextPLtypename;
 		npl.enabled = true;
+
+
+		if(pipeCounter == 0)
+		{
+			ArenaController arena = this.GetComponent<ArenaController>();
+			arena.arenaPipeLine = npl;
+			arena.enabled = true;
+			this.enabled = false;
+		}
 	}
 }

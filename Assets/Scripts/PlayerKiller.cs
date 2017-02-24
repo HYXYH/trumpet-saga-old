@@ -115,7 +115,11 @@ public class PlayerKiller : MonoBehaviour {
 			PipeLineGenerator pgn = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>();
 			pls = GameObject.FindGameObjectsWithTag("PipeLine");
 
+			ArenaController arena = GameObject.FindGameObjectWithTag("Generator").GetComponent<ArenaController>();
+			arena.enabled = false;
+
 			pgn.enabled = false;
+			pgn.pipeCounter = 1;
 			AirLevel = pgn.AirLevel;
 			levelPos = pgn.AirLevel.transform.position.y;
 

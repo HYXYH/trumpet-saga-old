@@ -19,7 +19,7 @@ public class PipeLine : MonoBehaviour {
 
 	public GameObject nextPipeLine;
 
-	public enum PipeLineType {simple, stair2, stair3, stair4, stair5, moving, moving2, closing};
+	public enum PipeLineType {simple, stair2, stair3, stair4, stair5, moving, moving2, bossPipe};
 	public PipeLineType type;
 
 	public bool isDying = false;

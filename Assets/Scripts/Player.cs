@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
 
 	public bool isCheating = false;
+	public bool isFighting = false;
 
 	public float maxSpeed = 5;
 	public float speed = -50f;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour {
 	private bool isJumping = false;
 	private Animator anim;
 	private Rigidbody2D rbody;
+	public SpriteRenderer spr;
 
 
 	bool sameTouch = false;
@@ -44,9 +46,6 @@ public class Player : MonoBehaviour {
 	// google rank (рейтинг игроков)
 
 
-
-	public SpriteRenderer spr;
-
 	// Use this for initialization
 	void Start () {
 		rbody = this.GetComponent<Rigidbody2D>();
@@ -63,7 +62,7 @@ public class Player : MonoBehaviour {
 
 		audioJump = AddAudio(clipJump, false, false, 0.8f);
 		audioCollide = AddAudio(clipCollide, false, false, 1);
-		//audioFire = AddAudio(audioFire, false, false, 0.8); 
+		//audioFire = AddAudio(clipFire, false, false, 0.8); 
 	} 
 	
 	// Update is called once per frame
@@ -89,25 +88,40 @@ public class Player : MonoBehaviour {
 		}
 		else
 		{
-			checkIfFailed();
+			
 
 			if(Input.touchCount == 0)
 			{
 				sameTouch = false;
 			}
 
-			if (!inAir && !sameTouch && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !incorrectParent)
+			if(isFighting)
 			{
-				rbody.velocity = new Vector2(0, rbody.velocity.y);
-				rbody.gravityScale = 0;
-				audioStep.Stop();
-				audioJump.Play();
-				inAir = true;
-				isJumping = true;
-				sameTouch = true;
-			}
 
-			anim.SetBool("inAir", inAir);
+				if (!sameTouch && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)))
+				{
+					//fire
+				}
+			}
+			else {
+				
+				checkIfFailed();
+
+				if (!inAir && !sameTouch && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !incorrectParent)
+				{
+					rbody.velocity = new Vector2(0, rbody.velocity.y);
+					rbody.gravityScale = 0;
+					audioStep.Stop();
+					audioJump.Play();
+					inAir = true;
+					isJumping = true;
+					sameTouch = true;
+				}
+
+				anim.SetBool("inAir", inAir);
+
+			}
+				
 			anim.SetFloat("speed", speed);
 				
 			if(incorrectParent)
