@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Boss : MonoBehaviour {
 
+	public GameObject AxePrefab;
+
 	public float maxSpeed = 5;
 	public float speed = -50f;
 
@@ -95,7 +97,11 @@ public class Boss : MonoBehaviour {
 
 	void fire()
 	{
-
+		//fire Axe
+		Vector3 pos = transform.position;
+		pos.y-=0.5f;
+		Instantiate(AxePrefab, pos, Quaternion.identity);
+		audioFire.Play();
 	}
 
 	void resetFireTime()
@@ -115,7 +121,7 @@ public class Boss : MonoBehaviour {
 			inAir = true;
 			isFalling = true;
 
-			GameObject.FindGameObjectWithTag("Generator").GetComponent<ArenaController>().bossDead();
+			GameObject.FindGameObjectWithTag("Generator").SendMessage("bossDead"); //.GetComponent<ArenaController>().bossDead();
 		}
 
 		flash = flashTime;

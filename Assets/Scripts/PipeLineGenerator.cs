@@ -156,6 +156,7 @@ public class PipeLineGenerator : MonoBehaviour {
 			ArenaController arena = this.GetComponent<ArenaController>();
 			arena.arenaPipeLine = npl;
 			arena.enabled = true;
+			arena.isFighting = false;
 			this.enabled = false;
 		}
 	}

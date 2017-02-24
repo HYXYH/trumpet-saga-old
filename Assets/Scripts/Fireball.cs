@@ -31,5 +31,10 @@ public class Fireball : MonoBehaviour {
 			coll.gameObject.SendMessage("shotDown");
 			Destroy(this.gameObject);
 		}
+
+		if (coll.gameObject.tag == "Axe") {
+			Destroy(coll.gameObject);
+			Destroy(this.gameObject);
+		}
 	}
 }

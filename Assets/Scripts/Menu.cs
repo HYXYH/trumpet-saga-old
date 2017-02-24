@@ -294,10 +294,11 @@ public class Menu : MonoBehaviour {
 			{
 				if(firstPipeline.GetComponent<PipeLine>().pipes[0].firstPipeInGame)
 				{
+					firstPipeline.GetComponent<PipeLine>().pipes[0].firstPipeInGame = false;// for correct kill processing
 					play();
 				}
 				else{
-					Debug.Log("Level complete!");
+					Debug.Log("Level complete! " + firstPipeline.GetComponent<PipeLine>().pipes[0].firstPipeInGame.ToString());
 					firstPipeline.GetComponent<PipeLine>().enabled = true;
 					firstPipeline = null;
 					pipeGenerator.enabled = true;

@@ -11,10 +11,14 @@ public class ArenaController : MonoBehaviour {
 	public GameObject BossPipeLine;
 	public GameObject Boss;
 
-	bool isFighting;
+	public bool isFighting;
 
 	// Use this for initialization
 	void Start () {
+		isFighting = false;
+	}
+
+	void Awake() {
 		isFighting = false;
 	}
 	
@@ -61,5 +65,8 @@ public class ArenaController : MonoBehaviour {
 		GameObject.Find("Background").GetComponent<Menu>().firstPipeline = BossPipeLine;
 
 		arenaPipeLine.transform.parent = BossPipeLine.transform;
+		isFighting = false;
+		Boss.GetComponent<Boss>().enabled = false;
+		this.enabled = false;
 	}
 }

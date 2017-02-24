@@ -179,7 +179,6 @@ public class PipePair : MonoBehaviour {
 		{
 			if(other.transform.position.y > this.transform.position.y)
 			{
-				firstPipeInGame = false; // for correct kill processing
 				this.GetComponent<Collider2D>().isTrigger = false;
 				isMoving = false;
 				close(fullTime);

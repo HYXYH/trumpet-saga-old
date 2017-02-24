@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0b6e012e4d96c4a89b1491c1c608bcd8
-timeCreated: 1487948454
+timeCreated: 1487962306
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -37,14 +37,14 @@ TextureImporter:
     21300060: boss_step_3
     21300062: boss_step_4
     21300064: boss_fall
-    21300066: atlas_trumpet_saga_16
-    21300068: atlas_trumpet_saga_17
-    21300070: atlas_trumpet_saga_18
-    21300072: atlas_trumpet_saga_19
-    21300074: atlas_trumpet_saga_20
-    21300076: atlas_trumpet_saga_21
-    21300078: atlas_trumpet_saga_22
-    21300080: atlas_trumpet_saga_23
+    21300066: axe_1
+    21300068: axe_2
+    21300070: axe_3
+    21300072: axe_4
+    21300074: axe_5
+    21300076: axe_6
+    21300078: axe_7
+    21300080: axe_8
     21300082: sp_pause
     21300084: atlas_trumpet_saga_25
     21300086: atlas_trumpet_saga_26
@@ -372,10 +372,10 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_16
+      name: axe_1
       rect:
         serializedVersion: 2
-        x: 718
+        x: 719
         y: 1188
         width: 30
         height: 45
@@ -385,7 +385,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_17
+      name: axe_2
       rect:
         serializedVersion: 2
         x: 788
@@ -398,7 +398,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_18
+      name: axe_3
       rect:
         serializedVersion: 2
         x: 868
@@ -411,7 +411,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_19
+      name: axe_4
       rect:
         serializedVersion: 2
         x: 953
@@ -424,7 +424,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_20
+      name: axe_5
       rect:
         serializedVersion: 2
         x: 1038
@@ -437,7 +437,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_21
+      name: axe_6
       rect:
         serializedVersion: 2
         x: 1118
@@ -450,7 +450,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_22
+      name: axe_7
       rect:
         serializedVersion: 2
         x: 1193
@@ -463,7 +463,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: atlas_trumpet_saga_23
+      name: axe_8
       rect:
         serializedVersion: 2
         x: 1278

@@ -308,27 +308,27 @@ public class Player : MonoBehaviour {
 			Debug.Log("turn left");
 		}
 	}
-
-	void OnCollisionStay2D(Collision2D coll) {
-		if (coll.gameObject.tag == "Background" || coll.gameObject.tag == "PipePair") {
-			inAir = false;
-		}
-
-		if (coll.gameObject.tag == "WallLeft" && speed < 0)
-		{
-			speed *= -1;
-			spr.flipX = true;
-			Debug.Log("turn right");
-		}
-
-		if (coll.gameObject.tag == "WallRight" && speed > 0)
-		{
-			speed *= -1;
-			spr.flipX = false;
-			Debug.Log("turn left");
-		}
-	}
-
+//
+//	void OnCollisionStay2D(Collision2D coll) {
+//		if (coll.gameObject.tag == "Background" || coll.gameObject.tag == "PipePair") {
+//			inAir = false;
+//		}
+//
+//		if (coll.gameObject.tag == "WallLeft" && speed < 0)
+//		{
+//			speed *= -1;
+//			spr.flipX = true;
+//			Debug.Log("turn right");
+//		}
+//
+//		if (coll.gameObject.tag == "WallRight" && speed > 0)
+//		{
+//			speed *= -1;
+//			spr.flipX = false;
+//			Debug.Log("turn left");
+//		}
+//	}
+//
 
 
 	public AudioSource AddAudio(AudioClip clip, bool loop, bool playAwake, float vol) { 
