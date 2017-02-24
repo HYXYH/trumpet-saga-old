@@ -136,7 +136,7 @@ public class Menu : MonoBehaviour {
 		shareMenu.SetActive(false);
 		cCurrent.enabled = false;
 		this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-		if(firstPipeline == null) {
+		if(firstPipeline == null || firstPipeline.name.Contains("Boss")) {
 			firstPipeline = (GameObject)GameObject.Instantiate(firstPipelinePrefab, new Vector3(0, 3.25f, 0), Quaternion.identity);
 			firstPipeline.GetComponent<Animation>().Play("FirstPipeOut");
 		}
@@ -292,7 +292,17 @@ public class Menu : MonoBehaviour {
 		{
 			if(other.transform.position.y > this.transform.position.y)
 			{
-				play();
+				if(firstPipeline.GetComponent<PipeLine>().pipes[0].firstPipeInGame)
+				{
+					play();
+				}
+				else{
+					Debug.Log("Level complete!");
+					firstPipeline.GetComponent<PipeLine>().enabled = true;
+					firstPipeline = null;
+					pipeGenerator.enabled = true;
+
+				}
 				this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			}
 		}

@@ -7,8 +7,9 @@ public class ArenaController : MonoBehaviour {
 	public GameObject BossPrefab;
 	public GameObject BossPipeLinePrefab;
 
-	GameObject BossPipeLine;
-	GameObject Boss;
+
+	public GameObject BossPipeLine;
+	public GameObject Boss;
 
 	bool isFighting;
 
@@ -40,5 +41,25 @@ public class ArenaController : MonoBehaviour {
 				Boss = (GameObject)Instantiate(BossPrefab, new Vector3(0, 5.5f, 0), Quaternion.identity);
 			}
 		}
+
+
+	}
+
+	public void bossDead()
+	{
+		isFighting = false;
+		this.enabled = false;
+
+		PipePair pp = BossPipeLine.GetComponent<PipeLine>().pipes[0];
+		pp.initPipes(0.5f, 0.5f);
+		pp.open(2);
+		BossPipeLine.GetComponent<BoxCollider2D>().isTrigger = true;
+		GameObject.Find("Player").GetComponent<Player>().transform.parent = GameObject.Find("AirLevel").transform;
+
+		GameObject.Find("Background").GetComponent<BoxCollider2D>().enabled = true;
+		GameObject.Find("Background").GetComponent<PipeLineGenerator>().lastPipeLine = BossPipeLine;
+		GameObject.Find("Background").GetComponent<Menu>().firstPipeline = BossPipeLine;
+
+		arenaPipeLine.transform.parent = BossPipeLine.transform;
 	}
 }

@@ -129,10 +129,10 @@ public class PipePair : MonoBehaviour {
 	private void processOpening()
 	{
 		isOpening = true;
-		float openPart = closeTime / fullTime;
-		if( openPart < 0)
+		float openPart = 1 - openTime / fullTime;
+		if( openPart > 1)
 		{
-			openPart = 0;
+			openPart = 1;
 			isOpening = false;
 		}
 		float currentHoleWidth = holeWidth * openPart;

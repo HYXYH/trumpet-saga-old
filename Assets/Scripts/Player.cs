@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	public bool isCheating = false;
 	public bool isFighting = false;
+	public bool isFlashing = false;
 
 	public float maxSpeed = 5;
 	public float speed = -50f;
@@ -22,12 +23,17 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D rbody;
 	public SpriteRenderer spr;
 
+	public GameObject fireBallPrefab;
 
 	bool sameTouch = false;
 	private bool isFalling = false;
 	private float fallTime = 0;
 	private float fullFallTime = 0;
 	private Vector3 fallPos;
+
+	private float flash;
+	public float flashTime = 1f;
+	public int flashAmount = 3;
 
 	public AudioClip clipStep;
 	public AudioClip clipJump;
@@ -53,6 +59,7 @@ public class Player : MonoBehaviour {
 		spr = this.GetComponent<SpriteRenderer>();
 
 		incorrectParent = false;
+		flash = flashTime;
 	}
 
 	public void Awake(){
@@ -61,8 +68,8 @@ public class Player : MonoBehaviour {
 		audioStep.pitch = 1.8f;
 
 		audioJump = AddAudio(clipJump, false, false, 0.8f);
-		audioCollide = AddAudio(clipCollide, false, false, 1);
-		//audioFire = AddAudio(clipFire, false, false, 0.8); 
+		audioCollide = AddAudio(clipCollide, false, false, 1f);
+		audioFire = AddAudio(clipFire, false, false, 0.8f); 
 	} 
 	
 	// Update is called once per frame
@@ -100,7 +107,11 @@ public class Player : MonoBehaviour {
 
 				if (!sameTouch && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)))
 				{
-					//fire
+					//fire fireBallPrefab
+					Vector3 pos = transform.position;
+					pos.y+=0.5f;
+					Instantiate(fireBallPrefab, pos, Quaternion.identity);
+					audioFire.Play();
 				}
 			}
 			else {
@@ -134,6 +145,9 @@ public class Player : MonoBehaviour {
 				audioStep.Play();
 			}
 		}
+
+		if(isFlashing)
+			processFlashing();
 	}
 
 	void FixedUpdate()
@@ -196,6 +210,7 @@ public class Player : MonoBehaviour {
 
 	void successJump(GameObject pipeLine)
 	{
+		Debug.Log("Success jumped over <" + pipeLine.name +">");
 		rbody.gravityScale = 10;
 		isJumping = false;
 
@@ -228,6 +243,30 @@ public class Player : MonoBehaviour {
 		transform.position = pos;
 	}
 
+	void processFlashing() {
+		//flashing
+		flash -= Time.deltaTime;
+		if(flash < 0)
+		{
+			flash = flashTime;
+			spr.material.SetFloat("_FlashAmount", 0);
+			isFlashing = false;
+			return;
+		}
+
+		float intervals = 2 * flashAmount;
+		float intervalLength = flashTime / intervals;
+		int currInterval = (int)(flash / intervalLength);
+		if(currInterval % 2 == 0)
+		{
+			spr.material.SetFloat("_FlashAmount", 0);
+		}
+		else
+		{
+			spr.material.SetFloat("_FlashAmount", 1);
+		}
+	}
+
 	public void die() {
 		isJumping = false;
 		audioStep.pitch = 1.8f;
@@ -236,6 +275,7 @@ public class Player : MonoBehaviour {
 		this.GetComponent<BoxCollider2D>().enabled = false;
 		this.transform.parent = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>().AirLevel.transform;
 		audioCollide.Play();
+		isFlashing = true;
 	}
 
 	public void fallDownToStart(float fTime)
@@ -258,6 +298,7 @@ public class Player : MonoBehaviour {
 			speed *= -1;
 			spr.flipX = true;
 			Debug.Log("turn right");
+
 		}
 
 		if (coll.gameObject.tag == "WallRight")
