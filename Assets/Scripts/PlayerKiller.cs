@@ -42,9 +42,10 @@ public class PlayerKiller : MonoBehaviour {
 						flyTime = fullFlyTime;
 						killTime = fullKillTime;
 					}
+
+//					GameObject.FindGameObjectWithTag("Clouds").GetComponent<CloudMover>().reset();
 					foreach(GameObject pl in pls)
 					{
-						GameObject.FindGameObjectWithTag("Clouds").GetComponent<CloudMover>().reset();
 						if(!pl.GetComponent<PipeLine>().pipes[0].firstPipeInGame)
 							Destroy(pl.gameObject);
 					}

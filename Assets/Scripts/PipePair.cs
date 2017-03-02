@@ -7,6 +7,8 @@ public class PipePair : MonoBehaviour {
 	private bool isOpening = false;
 	private bool isMoving = false;
 
+	public float openPart = 1f;
+
 	private float openTime = 0.5f;
 	private float closeTime = 0.5f;
 	public  float fullTime = 0.5f;
@@ -111,7 +113,7 @@ public class PipePair : MonoBehaviour {
 	private void processClosing()
 	{
 		isClosing = true;
-		float openPart = closeTime / fullTime;
+		openPart = closeTime / fullTime;
 		if( openPart < 0)
 		{
 			openPart = 0;
@@ -129,7 +131,7 @@ public class PipePair : MonoBehaviour {
 	private void processOpening()
 	{
 		isOpening = true;
-		float openPart = 1 - openTime / fullTime;
+		openPart = 1 - openTime / fullTime;
 		if( openPart > 1)
 		{
 			openPart = 1;
@@ -181,6 +183,9 @@ public class PipePair : MonoBehaviour {
 			{
 				this.GetComponent<Collider2D>().isTrigger = false;
 				isMoving = false;
+			
+				openTime = 0f;
+				fullTime = 0.1f;
 				close(fullTime);
 
 				GameObject.FindGameObjectWithTag("Player").SendMessage("scoreUp");

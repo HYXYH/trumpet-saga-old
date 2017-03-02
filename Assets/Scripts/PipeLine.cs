@@ -19,7 +19,7 @@ public class PipeLine : MonoBehaviour {
 
 	public GameObject nextPipeLine;
 
-	public enum PipeLineType {simple, stair2, stair3, stair4, stair5, moving, moving2, bossPipe};
+	public enum PipeLineType {simple, stair2, stair3, stair4, stair5, moving, moving2, closing, bossPipe};
 	public PipeLineType type;
 
 	public bool isDying = false;
@@ -47,6 +47,7 @@ public class PipeLine : MonoBehaviour {
 				if (p != null)
 				{
 					p.gameObject.transform.parent = null;
+					Debug.Log("PipeLine is calling playerkiller");
 					pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(p.gameObject.GetComponent<BoxCollider2D>());
 				}
 				GameObject.Destroy(this.gameObject);
@@ -58,6 +59,19 @@ public class PipeLine : MonoBehaviour {
 				Destroy(this.gameObject);
 		}
 
+
+		if(type == PipeLineType.closing)
+		{
+			if(pipes[0].openPart == 1)
+			{
+				pipes[0].close(1);
+			}
+			else if(pipes[0].openPart == 0)
+			{
+				pipes[0].open(1);
+			}
+		}
+
 	}
 
 	public void generatePipes()
@@ -65,7 +79,15 @@ public class PipeLine : MonoBehaviour {
 		switch(type)
 		{
 		case PipeLineType.simple:
-			holeWidth = 0.4f;
+//			holeWidth = 0.4f;
+			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
+			pipes[0].initPipes(holeCoord, holeWidth);
+			deleteHeight = -5;
+
+			break;
+
+		case PipeLineType.closing:
+			//			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[0].initPipes(holeCoord, holeWidth);
 			deleteHeight = -5;
@@ -73,7 +95,7 @@ public class PipeLine : MonoBehaviour {
 			break;
 
 		case PipeLineType.moving:
-			holeWidth = 0.4f;
+//			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[0].initPipes(holeCoord, holeWidth);
 			pipes[0].enableMoving(0.4f);
@@ -82,7 +104,7 @@ public class PipeLine : MonoBehaviour {
 			break;
 
 		case PipeLineType.moving2:
-			holeWidth = 0.4f;
+//			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth) + holeWidth / 2;
 			pipes[0].initPipes(holeCoord, holeWidth);
 			pipes[0].enableMoving(0.4f);
@@ -96,7 +118,7 @@ public class PipeLine : MonoBehaviour {
 			break;
 
 		case PipeLineType.stair2:
-			holeWidth = 0.4f;
+//			holeWidth = 0.4f;
 			holeCoord = Random.value * (1 - holeWidth);
 			pipes[0].initPipes(holeCoord, holeWidth);
 
@@ -152,6 +174,7 @@ public class PipeLine : MonoBehaviour {
 			{
 				Destroy(this.GetComponent<Collider2D>());
 				GameObject.FindGameObjectWithTag("Player").SendMessage("successJump", this.gameObject);
+				type = PipeLineType.simple;
 			}
 		}
 	}

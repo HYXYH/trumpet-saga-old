@@ -8,10 +8,14 @@ public class Player : MonoBehaviour {
 	public bool isFighting = false;
 	public bool isFlashing = false;
 
+
 	public float maxSpeed = 5;
 	public float speed = -50f;
+	private float maxSpeedInit;
+	private float speedInit;
 
-	public float jumpSpeed = 2;
+	public float jumpSpeed = 1;
+	private float jumpSpeedInit;
 	public bool inAir = false;
 	public float lastPipeSpeed = 0;
 
@@ -60,6 +64,10 @@ public class Player : MonoBehaviour {
 
 		incorrectParent = false;
 		flash = flashTime;
+
+		jumpSpeedInit = jumpSpeed;
+		maxSpeedInit = maxSpeed;
+		speedInit = speed;
 	}
 
 	public void Awake(){
@@ -102,6 +110,8 @@ public class Player : MonoBehaviour {
 				sameTouch = false;
 			}
 
+			checkIfFailed();
+
 			if(isFighting)
 			{
 
@@ -112,17 +122,18 @@ public class Player : MonoBehaviour {
 					pos.y+=0.5f;
 					Instantiate(fireBallPrefab, pos, Quaternion.identity);
 					audioFire.Play();
+					sameTouch = true;
+		
 				}
 			}
 			else {
-				
-				checkIfFailed();
 
 				if (!inAir && !sameTouch && (Input.touchCount > 0 || Input.GetMouseButtonDown(0)) && !incorrectParent)
 				{
 					rbody.velocity = new Vector2(0, rbody.velocity.y);
 					rbody.gravityScale = 0;
-					audioStep.Stop();
+//					audioStep.Stop();
+					audioStep.Pause();
 					audioJump.Play();
 					inAir = true;
 					isJumping = true;
@@ -134,6 +145,7 @@ public class Player : MonoBehaviour {
 			}
 				
 			anim.SetFloat("speed", speed);
+
 				
 			if(incorrectParent)
 			{
@@ -172,25 +184,39 @@ public class Player : MonoBehaviour {
 
 
 	void checkIfFailed() {
-		if(transform.parent == null || this.transform.localPosition.y < -3 && transform.parent.GetComponent<PipeLine>() != null)
+
+
+		if ((isFighting && this.transform.localPosition.y < -7) || 
+			!isFighting && (transform.parent == null || this.transform.localPosition.y < -3))// && transform.parent.GetComponent<PipeLine>() != null)
 		{
-			if(isCheating)
+
+			if(transform.parent != null)
 			{
-				transform.position = Vector3.zero;
-				rbody.velocity = Vector2.zero;
-
-				rbody.velocity = new Vector2(0, rbody.velocity.y);
-				rbody.gravityScale = 0;
-				audioJump.Play();
-				inAir = true;
-				isJumping = true;
-
-				return;
+				if(transform.parent.name.Contains("Boss") && this.transform.localPosition.y > -7)
+					return;
 			}
+			// if cheating or not he fall anyway, because we need a way to die in god mode
+			isCheating = false;
+			isFighting = false;
+
+//			if(isCheating)
+//			{
+//				transform.position = Vector3.zero;
+//				rbody.velocity = Vector2.zero;
+//
+//				rbody.velocity = new Vector2(0, rbody.velocity.y);
+//				rbody.gravityScale = 0;
+//				audioJump.Play();
+//				inAir = true;
+//				isJumping = true;
+//
+//				return;
+//			}
 			inAir = true;
 			rbody.velocity = Vector2.zero;
 			GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>().killedBy = "FellDown";
-			transform.parent.GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(GetComponent<BoxCollider2D>());
+			Debug.Log("checkIsFailed is calling playerkiller");
+			GameObject.Find("PipeLeft").GetComponent<PlayerKiller>().OnTriggerEnter2D(GetComponent<BoxCollider2D>());
 		}
 	}
 
@@ -206,6 +232,8 @@ public class Player : MonoBehaviour {
 	void scoreUp()
 	{
 		score++;
+
+		GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>().checkAndUnlockAchievments(score);
 	}
 
 	void successJump(GameObject pipeLine)
@@ -231,9 +259,10 @@ public class Player : MonoBehaviour {
 		float rel = pipeSpeed / lastPipeSpeed;
 		speed *= rel;
 		maxSpeed *= rel;
+		jumpSpeed *= rel;
 		lastPipeSpeed = pipeSpeed;
 		audioStep.pitch *= rel;
-
+		anim.speed *= rel;
 	}
 
 	void processJumping() {
@@ -275,7 +304,11 @@ public class Player : MonoBehaviour {
 		this.GetComponent<BoxCollider2D>().enabled = false;
 		this.transform.parent = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>().AirLevel.transform;
 		audioCollide.Play();
-		isFlashing = true;
+		maxSpeed = maxSpeedInit;
+		jumpSpeed = jumpSpeedInit;
+		speed = speedInit;
+		spr.flipX = false;
+//		isFlashing = true;
 	}
 
 	public void fallDownToStart(float fTime)

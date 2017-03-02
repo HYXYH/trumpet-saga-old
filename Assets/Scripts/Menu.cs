@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using GoogleMobileAds.Api;
 using UnityEngine.Analytics;
 
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
+
 public class Menu : MonoBehaviour {
 
 	public GameObject firstPipelinePrefab;
@@ -12,6 +16,7 @@ public class Menu : MonoBehaviour {
 	public GameObject allMenu;
 	public GameObject replayMenu;
 	public GameObject shareMenu;
+	public GameObject achievementsMenu;
 	public GameObject startMenu;
 	public GameObject volOn;
 	public GameObject volOff;
@@ -34,14 +39,13 @@ public class Menu : MonoBehaviour {
 
 	bool adsDisabled = false;
 	bool adLeavingApplication = false;
-
+	bool isSignedUp = false;
 
 
 	bool isPlaying = false;
 
 	PipeLineGenerator pipeGenerator;
 	CloudMover cloudMover;
-	float timeToMaxSpeed;
 	float currentSpeed;
 
 	InterstitialAd interstitial;
@@ -58,8 +62,55 @@ public class Menu : MonoBehaviour {
 	
 		pipeGenerator = this.GetComponent<PipeLineGenerator>();
 		cloudMover = this.gameObject.GetComponentInChildren<CloudMover>();
-		timeToMaxSpeed = pipeGenerator.timeToMaxSpeed;
 		currentSpeed = pipeGenerator.currentSpeed;
+
+		initGooglePlayServices();
+		signUp();
+	}
+
+
+	void initGooglePlayServices() {
+		PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+
+		PlayGamesPlatform.InitializeInstance(config);
+		// recommended for debugging:
+		PlayGamesPlatform.DebugLogEnabled = true;
+		// Activate the Google Play Games platform
+		PlayGamesPlatform.Activate();
+
+	}
+
+	void signUp()
+	{
+		Social.localUser.Authenticate((bool success) => {
+			// handle success or failure
+			isSignedUp = success;
+		});
+	}
+
+
+	public void showLeaderBoard() {
+		if(isSignedUp){
+			PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIsP_yp_EQEAIQAA");		
+		}
+		else {
+			signUp();
+			if(isSignedUp){
+				PlayGamesPlatform.Instance.ShowLeaderboardUI("CgkIsP_yp_EQEAIQAA");
+			}
+		}
+	}
+
+	public void showAchievments() {
+		if(isSignedUp){
+			Social.ShowAchievementsUI();	
+		}
+		else {
+			signUp();
+			if(isSignedUp){
+				Social.ShowAchievementsUI();
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -109,6 +160,8 @@ public class Menu : MonoBehaviour {
 		player.GetComponent<Player>().score = 0;
 		cCurrent.enabled = true;
 
+		GameObject.Find("Clouds").GetComponent<CloudMover>().reset();
+
 		if(!adsDisabled){
 			if(interstitial != null)
 				interstitial.Destroy();
@@ -117,7 +170,7 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void killedRestart() {
-		if(!adsDisabled){
+		if(!adsDisabled && gamesPlayed % 3 == 0){
 			if ((interstitial != null) && interstitial.IsLoaded()) {
 				interstitial.Show();
 			}
@@ -130,6 +183,11 @@ public class Menu : MonoBehaviour {
 				{ "PlayTime", Time.time - startPlayTime }
 			});
 
+		if (isSignedUp) {
+			Social.ReportScore(lastScore, "CgkIsP_yp_EQEAIQAA", (bool success) => {
+			// handle success or failure
+			});
+		}
 
 		isPlaying = false;
 		Debug.Log("Restart");
@@ -138,12 +196,14 @@ public class Menu : MonoBehaviour {
 		shareMenu.SetActive(false);
 		cCurrent.enabled = false;
 		this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+//		Vector2 off = this.GetComponent<BoxCollider2D>().offset;
+//		off.y = 3.4f;
+//		this.GetComponent<BoxCollider2D>().offset = off;
 		if(firstPipeline == null || firstPipeline.name.Contains("Boss")) {
 			firstPipeline = (GameObject)GameObject.Instantiate(firstPipelinePrefab, new Vector3(0, 3.25f, 0), Quaternion.identity);
 			firstPipeline.GetComponent<Animation>().Play("FirstPipeOut");
 		}
 		pipeGenerator.lastPipeLine = firstPipeline;
-		pipeGenerator.timeToMaxSpeed = timeToMaxSpeed;
 		pipeGenerator.currentSpeed = currentSpeed;
 	}
 
@@ -207,7 +267,7 @@ public class Menu : MonoBehaviour {
 	{
 		// Настройки плагина
 		string shareText  = "Trumpet Saga\n";
-		string gameLink = "Here are my results! Come on join me! "+"\nhttps://play.google.com/store/apps/details?id=???";
+		string gameLink = "Here are my results! Come on join me! "+"\nhttps://play.google.com/store/apps/details?id=com.Medbe.TrumpetSaga";
 		string subject = "";
 		string imageName = "Screenshot"; // without the extension, for iinstance, MyPic 
 
@@ -254,6 +314,45 @@ public class Menu : MonoBehaviour {
 	}
 
 
+
+	public void checkAndUnlockAchievments(int score)
+	{
+		if (!isSignedUp)
+			return;
+
+		if(score == 20)
+		{
+			Social.ReportProgress("CgkIsP_yp_EQEAIQAg", 100.0f, (bool success) => {
+			// handle success or failure
+			});
+		}
+		else if(score == 40)
+		{
+			Social.ReportProgress("CgkIsP_yp_EQEAIQAw", 100.0f, (bool success) => {
+			// handle success or failure
+			});
+		}
+		else if(score == 60)
+		{
+			Social.ReportProgress("CgkIsP_yp_EQEAIQBA", 100.0f, (bool success) => {
+			// handle success or failure
+			});
+		}
+		else if(score == 80)
+		{
+			Social.ReportProgress("CgkIsP_yp_EQEAIQBQ", 100.0f, (bool success) => {
+			// handle success or failure
+			});
+		}
+		else if(score == 100)
+		{
+			Social.ReportProgress("CgkIsP_yp_EQEAIQBg", 100.0f, (bool success) => {
+			// handle success or failure
+			});
+		}
+	}
+
+
 	public void noAdsPurchased(){
 		PlayerPrefs.SetString("NoAds","Ads Disabled");
 		adsDisabled = true;
@@ -273,6 +372,18 @@ public class Menu : MonoBehaviour {
 		shareMenu.SetActive(false);
 	}
 
+	public void openAchievementsMenu() {
+		allMenu.GetComponent<UnityEngine.UI.Image>().enabled = false;
+		replayMenu.SetActive(false);
+		achievementsMenu.SetActive(true);
+	}
+
+	public void backFromAchievements() {
+		allMenu.GetComponent<UnityEngine.UI.Image>().enabled = true;
+		replayMenu.SetActive(true);
+		achievementsMenu.SetActive(false);
+	}
+
 
 	public void switchVolumeToOn() {
 		volOff.SetActive(false);
@@ -284,8 +395,37 @@ public class Menu : MonoBehaviour {
 		volOn.SetActive(false);
 		volOff.SetActive(true);
 		AudioListener.volume = 0f;
+
+		GameObject.Find("MoneyWarning").GetComponent<UnityEngine.UI.Text>().text = "";
 	}
 
+
+
+	public void checkIAP()
+	{
+//		AndroidJavaClass activityClass;
+//		AndroidJavaObject activity, packageManager;
+//		AndroidJavaObject launch;
+//
+//
+//		activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+//		activity = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+//		packageManager = activity.Call<AndroidJavaObject>("getPackageManager");
+////		launch = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage",package);
+////		activity.Call("startActivity",launch);
+//
+//		AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+//		AndroidJavaObject intentObject = new AndroidJavaObject("com.android.vending.billing.InAppBillingService.BIND");
+//
+//		int size = packageManager.Call<AndroidJavaObject>("queryIntentServices",intentObject, 0).Call<int>("size");
+//
+//		if(size == 0)
+//			GameObject.Find("MoneyWarning").GetComponent<UnityEngine.UI.Text>().text = "на этом телефоне IAP не работает";
+//		else
+//			GameObject.Find("MoneyWarning").GetComponent<UnityEngine.UI.Text>().text = "IAP is ok";
+//
+////		return list.size() > 0;
+	}
 
 
 

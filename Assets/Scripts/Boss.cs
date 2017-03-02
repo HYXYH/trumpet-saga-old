@@ -113,7 +113,7 @@ public class Boss : MonoBehaviour {
 
 	void shotDown()
 	{
-		Debug.Log("Shot Down (" + healthPoints.ToString() +" hp)");
+//		Debug.Log("Shot Down (" + healthPoints.ToString() +" hp)");
 		healthPoints--;
 		audioCollide.Play();
 		if(healthPoints <= 0)

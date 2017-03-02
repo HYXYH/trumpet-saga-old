@@ -20,9 +20,7 @@ public class spResize : MonoBehaviour {
 
 	private void Update()
 	{
-		#if UNITY_EDITOR
 		Resize();
-		#endif
 	}
 
 	void Resize()
@@ -34,6 +32,9 @@ public class spResize : MonoBehaviour {
 			if(this.gameObject.tag == "RightPipe"){
 				scale.x *= -1;
 //				Debug.Log("RightPipe Found!");
+			}
+			if(this.gameObject.tag == "Boss"){
+				scale *= 1.5f;
 			}
 			transform.localScale = scale;
 

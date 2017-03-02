@@ -28,6 +28,9 @@ public class Axe : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.tag == "Player") {
+			if(coll.collider.GetComponent<Player>().isCheating) {
+				return;
+			}
 
 			// stop boss
 			ArenaController arena = GameObject.FindGameObjectWithTag("Generator").GetComponent<ArenaController>();
@@ -38,6 +41,7 @@ public class Axe : MonoBehaviour {
 			GameObject.Find("Player").GetComponent<Player>().isFighting = false;
 			GameObject.FindGameObjectWithTag("Generator").GetComponent<Menu>().killedBy = "Boss";
 //			GameObject.FindGameObjectWithTag("PipeLine").GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(coll);
+			Debug.Log("Axe is calling playerkiller");
 			GameObject.FindGameObjectWithTag("PipeLine").GetComponent<PipeLine>().pipes[0].LeftPipe.GetComponent<PlayerKiller>().OnTriggerEnter2D(coll.collider.gameObject.GetComponent<BoxCollider2D>());
 
 

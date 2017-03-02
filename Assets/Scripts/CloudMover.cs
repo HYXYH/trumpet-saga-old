@@ -17,14 +17,7 @@ public class CloudMover : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
-		if(pipelineGenerator == null)
-		{
-			pipelineGenerator = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>();
-		}
-
-		speed = pipelineGenerator.currentSpeed;
-	
+	public void Start () {
 		reset();
 	}
 	
@@ -61,7 +54,16 @@ public class CloudMover : MonoBehaviour {
 	}
 
 	public void reset() {
-		this.transform.parent = pipelineGenerator.AirLevel.transform;
+		if(pipelineGenerator == null)
+		{
+			pipelineGenerator = GameObject.FindGameObjectWithTag("Generator").GetComponent<PipeLineGenerator>();
+		}
+
+		speed = pipelineGenerator.currentSpeed;
+
+		this.transform.parent =  pipelineGenerator.AirLevel.transform;
+		this.transform.localPosition = new Vector3(0, 10 ,0);
+
 		currBig = 0;
 		currSmall = 0;
 		for(int i = 0; i < bigClouds.Length; i++)

@@ -3,13 +3,22 @@ using System.Collections;
 
 public class PipeLineGenerator : MonoBehaviour {
 
+	public float startSpeed = 0;
 	public float currentSpeed = 1;
 	public float currentDistance = 1;
 
-	public float timeToMaxSpeed = 100;
+	public float timeToMaxBackgoundFull = 100;
+	public float timeToMaxBackgroundLeft = 0;
+
+	public float timeToMaxSpeedFull = 100;
+	public float timeToMaxSpeedLeft = 0;
 	public float maxSpeed = 20;
 
+	public float maxHoleWidth = 0.6f;
+	public float minHoleWidth = 0.2f;
+
 	public GameObject prefab_pl_simple;
+	public GameObject prefab_pl_closing;
 	public GameObject prefab_pl_moving;
 	public GameObject prefab_pl_moving2;
 	public GameObject prefab_pl_stair2;
@@ -19,8 +28,7 @@ public class PipeLineGenerator : MonoBehaviour {
 	public GameObject AirLevel;
 	public GameObject lastPipeLine;
 
-	private float fullTimeToMax = 0;
-	private float startSpeed = 0;
+
 	private Player player;
 
 	PipeLine.PipeLineType nextPLtypename;
@@ -28,14 +36,16 @@ public class PipeLineGenerator : MonoBehaviour {
 
 	public int pipeCounter;
 
-	int bossCounter = 0;
+	int firstBossAppearAfter = 20;
+	public int bossCounter = 0;
 
 	// Use this for initialization
 	public void Start () {
 		bossCounter = 0;
 		pipeCounter = 1;
-		fullTimeToMax = timeToMaxSpeed;
-		startSpeed = currentSpeed;
+		timeToMaxSpeedLeft = timeToMaxSpeedFull;
+		timeToMaxBackgroundLeft = timeToMaxBackgoundFull;
+		currentSpeed = startSpeed;
 
 		nextPLtypename = PipeLine.PipeLineType.simple;
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -44,24 +54,26 @@ public class PipeLineGenerator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if ( timeToMaxSpeedLeft > -0 ){
+			timeToMaxSpeedLeft -= Time.deltaTime;
+			currentSpeed = startSpeed +(maxSpeed - startSpeed) * ((timeToMaxSpeedFull - timeToMaxSpeedLeft) / timeToMaxSpeedFull);
+		}
+
+		if(timeToMaxBackgroundLeft > -0){
+			timeToMaxBackgroundLeft -= Time.deltaTime;
+			AirLevel.transform.position = new Vector3(0,-10 - 39 * ((timeToMaxBackgoundFull - timeToMaxBackgroundLeft) / timeToMaxBackgoundFull),0);
+		}
+
+
 		currentDistance = Vector3.Distance(lastPipeLine.transform.position, new Vector3(0,5.5f,0));
 		if ( distanceToNextPipe < currentDistance)
 		{
-			
+
 			genNewPipeLine();
 			genTypeForNextPipeLine();
 
 		}
 
-		if ( timeToMaxSpeed > -2 ){
-			timeToMaxSpeed -= Time.deltaTime;
-			currentSpeed = startSpeed +(maxSpeed - startSpeed) * ((fullTimeToMax - timeToMaxSpeed) / fullTimeToMax);
-			AirLevel.transform.position = new Vector3(0,-10 - 39 * ((fullTimeToMax - timeToMaxSpeed) / fullTimeToMax),0);
-		}
-
-//		float newSpeed = (maxSpeed - startSpeed) * ((fullTimeToMax - timeToMaxSpeed) / fullTimeToMax);
-//		if(currentSpeed < newSpeed)
-//			currentSpeed = newSpeed;
 	}
 
 	void genTypeForNextPipeLine()
@@ -69,19 +81,22 @@ public class PipeLineGenerator : MonoBehaviour {
 //		float pscore = player.score;
 		float pscore = 15 + bossCounter * 10;
 		float ptype = 0;
-		if(pscore > 60)
-			ptype = 60 * Random.value;
+		if(pscore > 70)
+			ptype = 70 * Random.value;
 		else
 			ptype = pscore * Random.value;
 
-		if(ptype > 50){
+		if(ptype > 60){
 			nextPLtypename = PipeLine.PipeLineType.stair4;
 		}
-		else if(ptype > 40){
+		else if(ptype > 50){
 			nextPLtypename = PipeLine.PipeLineType.stair3;
 		}
-		else if(ptype > 30){
+		else if(ptype > 40){
 			nextPLtypename = PipeLine.PipeLineType.moving2;
+		}
+		else if(ptype > 30){
+			nextPLtypename = PipeLine.PipeLineType.closing;
 		}
 		else if(ptype > 20){
 			nextPLtypename = PipeLine.PipeLineType.stair2;
@@ -99,7 +114,7 @@ public class PipeLineGenerator : MonoBehaviour {
 	public void genNewPipeLine() {
 		GameObject newPipeline;
 		pipeCounter++;
-		if(pipeCounter%20 == 0)
+		if(pipeCounter % (firstBossAppearAfter + bossCounter * 5) == 0)
 		{
 			nextPLtypename = PipeLine.PipeLineType.simple;
 			pipeCounter = 0;
@@ -110,6 +125,11 @@ public class PipeLineGenerator : MonoBehaviour {
 		{
 		case PipeLine.PipeLineType.simple:
 			newPipeline = (GameObject)Instantiate(prefab_pl_simple, new Vector3(0, 5.5f, 0), Quaternion.identity);
+			distanceToNextPipe = 2;
+			break;
+
+		case PipeLine.PipeLineType.closing:
+			newPipeline = (GameObject)Instantiate(prefab_pl_closing, new Vector3(0, 5.5f, 0), Quaternion.identity);
 			distanceToNextPipe = 2;
 			break;
 
@@ -153,6 +173,7 @@ public class PipeLineGenerator : MonoBehaviour {
 		PipeLine npl = newPipeline.GetComponent<PipeLine>();
 		npl.speed = currentSpeed;
 		npl.type = nextPLtypename;
+		npl.holeWidth = minHoleWidth +(maxHoleWidth - minHoleWidth) * (timeToMaxSpeedLeft / timeToMaxSpeedFull);
 		npl.enabled = true;
 
 
